@@ -14,4 +14,4 @@ spring:
     defer-datasource-initialization: true
 
 server:
-  port: 8083 # Asignamos el 8083 para no chocar con los otros servicios
+  port: 8083
