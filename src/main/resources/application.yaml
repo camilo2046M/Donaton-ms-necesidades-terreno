@@ -2,12 +2,12 @@ spring:
   application:
     name: donaton-ms-necesidades
   datasource:
-    url: jdbc:h2:mem:necesidadesdb
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:postgresql://localhost:5432/necesidades_db
+    username: postgres
+    password: 12345
+    driver-class-name: org.postgresql.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true

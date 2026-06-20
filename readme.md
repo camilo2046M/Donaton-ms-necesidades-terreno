@@ -11,6 +11,9 @@ Este microservicio utiliza **JaCoCo (Java Code Coverage)** para medir la cobertu
 
 Sigue estos pasos para ejecutar la suite de pruebas y generar el reporte analítico y gráfico:
 
+## documentacion swagger
+
+
 #### 1. Agregar el Plugin al Proyecto (Ya configurado)
 El archivo `pom.xml` incluye el plugin oficial de JaCoCo en la sección de construcción (`<build>` -> `<plugins>`):
 ```xml`
