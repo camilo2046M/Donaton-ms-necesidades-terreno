@@ -1,10 +1,10 @@
 package com.gestionDonaton.gestion_necesidades_terreno.controller;
 
-
 import com.gestionDonaton.gestion_necesidades_terreno.dto.NecesidadRequestDTO;
 import com.gestionDonaton.gestion_necesidades_terreno.dto.NecesidadResponseDTO;
 import com.gestionDonaton.gestion_necesidades_terreno.service.NecesidadService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+        import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/necesidades")
@@ -45,6 +45,23 @@ public class NecesidadController {
     @ApiResponse(responseCode = "200", description = "Listado de necesidades obtenido exitosamente")
     public ResponseEntity<List<NecesidadResponseDTO>> listarNecesidades() {
         List<NecesidadResponseDTO> response = necesidadService.listarTodas();
+        return ResponseEntity.ok(response);
+    }
+
+    // === AGREGADO PARA EL BFF: Endpoint para atender la necesidad ===
+    @PatchMapping("/{id}/atender")
+    @Operation(
+            summary = "Marcar una necesidad como atendida",
+            description = "Modifica parcialmente el estado de una necesidad en terreno a 'ATENDIDA' usando su ID."
+    )
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Necesidad marcada como atendida correctamente"),
+            @ApiResponse(responseCode = "404", description = "No se encontró ninguna necesidad con el ID proporcionado")
+    })
+    public ResponseEntity<NecesidadResponseDTO> atenderNecesidad(
+            @Parameter(description = "ID único de la necesidad a modificar", required = true)
+            @PathVariable Long id) {
+        NecesidadResponseDTO response = necesidadService.atenderNecesidad(id);
         return ResponseEntity.ok(response);
     }
 }

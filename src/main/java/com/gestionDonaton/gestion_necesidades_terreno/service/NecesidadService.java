@@ -48,4 +48,12 @@ public class NecesidadService {
                 .fechaReporte(necesidad.getFechaReporte())
                 .build();
     }
+    public NecesidadResponseDTO atenderNecesidad(Long id) {
+        Necesidad necesidad = necesidadRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No se encontró la necesidad con ID: " + id));
+
+        necesidad.setEstado("ATENDIDA");
+        Necesidad actualizada = necesidadRepository.save(necesidad);
+        return mapToResponseDTO(actualizada);
+    }
 }
